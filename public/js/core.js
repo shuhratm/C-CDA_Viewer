@@ -21,8 +21,23 @@ $(document).ready(function(){
 	})
 })
 
+// Helper function to escape HTML
+function escapeHtml(text) {
+	if (!text) return '';
+	var map = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#039;'
+	};
+	return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
 // Load medical files from backend API
 function loadMedicalFiles(){
+	$('#medical-files').html('<p><i class="fa fa-spinner fa-spin"></i> Loading your medical records...</p>');
+
 	$.get('/api/files', function(data) {
 		var s = '';
 		if(data.length === 0) {
@@ -30,19 +45,33 @@ function loadMedicalFiles(){
 		} else {
 			for(var i = 0; i < data.length; i++) {
 				var file = data[i];
-				s += '<div style="margin-bottom: 0.5em;">';
-				s += '<span style="width:90%;text-align:left" data-file-path="' + file.path + '" class="pure-button medical-file-btn">';
-				s += '<i class="fa fa-file-text-o"></i> ' + file.displayName + ' <i class="fa fa-angle-double-right"></i>';
-				s += '</span>';
+				s += '<div class="medical-record-card" data-file-path="' + file.path + '">';
+				s += '  <div class="record-header">';
+				s += '    <div class="record-patient-name">';
+				s += '      <i class="fa fa-user"></i> <strong>' + escapeHtml(file.patientName) + '</strong>';
+				s += '    </div>';
+				s += '    <div class="record-date">';
+				s += '      <i class="fa fa-calendar"></i> ' + escapeHtml(file.dateFormatted);
+				s += '    </div>';
+				s += '  </div>';
+				s += '  <div class="record-filename">';
+				s += '    <i class="fa fa-file-text-o"></i> ' + escapeHtml(file.displayName);
+				s += '  </div>';
+				s += '  <div class="record-arrow">';
+				s += '    <i class="fa fa-angle-double-right"></i>';
+				s += '  </div>';
 				s += '</div>';
 			}
 		}
 		$('#medical-files').html(s);
 
-		// Attach click handlers to medical file buttons
-		$('.medical-file-btn').off('click').click(function(){
+		// Attach click handlers to medical record cards
+		$('.medical-record-card').off('click').click(function(){
 			$('#viewcda').html('');
 			var filePath = $(this).attr('data-file-path');
+
+			// Add loading state to the clicked card
+			$(this).addClass('loading');
 
 			// Fetch the file content from the API as text
 			$.ajax({
@@ -58,6 +87,9 @@ function loadMedicalFiles(){
 				},
 				error: function() {
 					alert('Error loading medical record file.');
+				},
+				complete: function() {
+					$('.medical-record-card').removeClass('loading');
 				}
 			});
 		});
