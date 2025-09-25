@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Personal Medical Records Viewer">
+
+	<title>Personal Medical Records Viewer</title>
+
+	<script src="js/jquery-1.12.0.min.js"></script>	
+	<!--
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>window.jQuery || document.write('&lt;script src="js/jquery-1.12.0.min.js">\x3C/script>')</script>
+	-->
+	<script src="js/core.js"></script>
+    		
+			<!--<link rel="stylesheet" type="text/css" media="all" href="css/font-awesome.css" />-->
+			<link rel="stylesheet" type="text/css" media="all" href="css/cda.css" />
+			<link rel="stylesheet" type="text/css" media="all" href="css/pure-min.css" />
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.css">
+	<link rel="stylesheet" href="css/pureextension.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/marketing-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="css/marketing.css">
+    <!--<![endif]-->
+
+
+	<script src="js/packery.pkgd.min.js"></script>
+	<script src="js/draggabilly.pkgd.min.js"></script>
+	<!--
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/masonry.pkgd.min.js">\x3C/script>')</script>
+	-->
+	
+	<script src="js/xslt/xslt.js"></script>
+	<script src="js/core.js"></script>
+	
+	
+</head>
+<body>
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+<!--<![endif]-->
+
+	<div class="custom-wrapper pure-g home-menu pure-menu pure-menu-fixed" style="width:100%" id="men">
+		<div class="pure-u-1">
+			
+			<span class="pure-button viewbtn" id="backbtn" id_target="inputcda" style="float:right;display:block"><i class="fa fa-lg fa-list"></i> Medical Records</span>
+			<a href="#" class="" style="float:left;font-weight:bold;font-size:1.75em;;padding-top:0.2em;padding-bottom:0.5em;text-decoration:none">Personal Medical Records</a>
+		</div>
+	</div>
+
+	<div class="content-wrapper" id="content-wrapper" style="top:auto">
+		<div class="pure-g"  style="margin-top:3em">
+			<div class="pure-u-1">
+
+				<div class=" cdaview"  id="inputcda" style="padding:1em;">
+					<div style="margin:0.5em">
+						<h2>Your Medical Records</h2>
+						<p>Click on any document below to view it in the C-CDA viewer:</p>
+					</div>
+					<div id="medical-files" style="font-size:90%">
+						<p>Loading your medical records...</p>
+					</div>
+					<p><small>After viewing a document, click 'Medical Records' (top right) to return to this list.</small></p>
+				</div>
+				<div class=" cdaview"  id="viewcda">
+					<p><p>
+				</div>
+				<div class="">
+					<span id="storagemsg"></span>
+				</div>
+				
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+</body>
+</html>
